@@ -1108,8 +1108,21 @@
       ]
     },
     "expression": {
-      "type": "SYMBOL",
-      "name": "assignment"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "assignment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "call"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "primary"
+        }
+      ]
     },
     "assignment": {
       "type": "SEQ",
@@ -1597,8 +1610,12 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "primary"
+          "type": "FIELD",
+          "name": "callee",
+          "content": {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
         },
         {
           "type": "REPEAT",
