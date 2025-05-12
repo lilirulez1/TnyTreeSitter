@@ -57,8 +57,6 @@
 [
   "("
   ")"
-  "{"
-  "}"
   "["
   "]"
   ";"
@@ -66,6 +64,16 @@
   ","
   "."
 ] @punctuation.delimiter
+
+[
+  "{"
+  "}"
+] @punctuation.bracket;
+
+[
+  ","
+  "."
+] @punctuation
 
 ;; Literals
 (number) @number
@@ -79,6 +87,11 @@
 (identifier) @variable
 (type) @type
 (attribute) @attribute
+
+;; types
+(builtin_type) @keyword
+(type (builtin_type) @keyword)
+(type (identifier) @type)
 
 ;; Function and type declarations
 (function_declaration name: (identifier) @function)

@@ -74,7 +74,7 @@ module.exports = grammar({
         "(",
         optional($.param_list),
         ")",
-        $.block,
+        field("body", $.block),
       ),
 
     function_declaration: ($) =>
@@ -85,7 +85,7 @@ module.exports = grammar({
         "(",
         optional($.param_list),
         ")",
-        $.block,
+        field("body", $.block),
       ),
 
     callback_declaration: ($) =>
@@ -177,7 +177,8 @@ module.exports = grammar({
       ),
 
     return_statement: ($) => seq("return", $.expression, ";"),
-    while_statement: ($) => seq("while", "(", $.expression, ")", $.statement),
+    while_statement: ($) =>
+      seq("while", "(", $.expression, ")", field("body", $.statement)),
     for_statement: ($) =>
       seq(
         "for",
@@ -187,7 +188,7 @@ module.exports = grammar({
         ";",
         optional($.expression),
         ")",
-        $.statement,
+        field("body", $.statement),
       ),
     for_initializer: ($) =>
       choice($.variable_statement, $.expression_statement, ";"),
@@ -276,7 +277,23 @@ module.exports = grammar({
 
     primary: ($) => choice($.literal, $.identifier, $.lambda_expression),
 
-    type: ($) => seq($.identifier, repeat(choice("*", "&"))),
+    type: ($) =>
+      seq(choice($.identifier, $.builtin_type), repeat(choice("*", "&"))),
+    builtin_type: ($) =>
+      choice(
+        "void",
+        "bool",
+        "u8",
+        "u16",
+        "u32",
+        "u64",
+        "i8",
+        "i16",
+        "i32",
+        "i64",
+        "f32",
+        "f64",
+      ),
 
     identifier: ($) => /[a-zA-Z_][a-zA-Z0-9_]*/,
     literal: ($) => choice($.number, $.string, "true", "false"),

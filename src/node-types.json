@@ -156,6 +156,11 @@
     }
   },
   {
+    "type": "builtin_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "call",
     "named": true,
     "fields": {},
@@ -428,7 +433,18 @@
   {
     "type": "for_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "statement",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
       "required": true,
@@ -440,10 +456,6 @@
         {
           "type": "for_initializer",
           "named": true
-        },
-        {
-          "type": "statement",
-          "named": true
         }
       ]
     }
@@ -452,6 +464,16 @@
     "type": "function_declaration",
     "named": true,
     "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -475,12 +497,8 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "block",
-          "named": true
-        },
         {
           "type": "modifiers",
           "named": true
@@ -532,6 +550,16 @@
     "type": "interrupt_declaration",
     "named": true,
     "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "block",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -545,12 +573,8 @@
     },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
-        {
-          "type": "block",
-          "named": true
-        },
         {
           "type": "modifiers",
           "named": true
@@ -948,6 +972,10 @@
       "required": true,
       "types": [
         {
+          "type": "builtin_type",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         }
@@ -1078,17 +1106,24 @@
   {
     "type": "while_statement",
     "named": true,
-    "fields": {},
+    "fields": {
+      "body": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "statement",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
           "type": "expression",
-          "named": true
-        },
-        {
-          "type": "statement",
           "named": true
         }
       ]
@@ -1255,6 +1290,10 @@
     "named": false
   },
   {
+    "type": "bool",
+    "named": false
+  },
+  {
     "type": "callback",
     "named": false
   },
@@ -1280,11 +1319,35 @@
     "named": false
   },
   {
+    "type": "f32",
+    "named": false
+  },
+  {
+    "type": "f64",
+    "named": false
+  },
+  {
     "type": "false",
     "named": false
   },
   {
     "type": "for",
+    "named": false
+  },
+  {
+    "type": "i16",
+    "named": false
+  },
+  {
+    "type": "i32",
+    "named": false
+  },
+  {
+    "type": "i64",
+    "named": false
+  },
+  {
+    "type": "i8",
     "named": false
   },
   {
@@ -1340,7 +1403,27 @@
     "named": false
   },
   {
+    "type": "u16",
+    "named": false
+  },
+  {
+    "type": "u32",
+    "named": false
+  },
+  {
+    "type": "u64",
+    "named": false
+  },
+  {
+    "type": "u8",
+    "named": false
+  },
+  {
     "type": "use",
+    "named": false
+  },
+  {
+    "type": "void",
     "named": false
   },
   {
