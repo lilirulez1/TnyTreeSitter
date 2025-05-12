@@ -40,7 +40,7 @@ module.exports = grammar({
       seq(
         optional($.modifiers),
         "struct",
-        $.identifier,
+        field("name", $.identifier),
         "{",
         repeat($.struct_field),
         "}",
@@ -70,7 +70,7 @@ module.exports = grammar({
       seq(
         optional($.modifiers),
         "interrupt",
-        $.identifier,
+        field("name", $.identifier),
         "(",
         optional($.param_list),
         ")",
@@ -80,8 +80,8 @@ module.exports = grammar({
     function_declaration: ($) =>
       seq(
         optional($.modifiers),
-        $.type,
-        $.identifier,
+        field("return_type", $.type),
+        field("name", $.identifier),
         "(",
         optional($.param_list),
         ")",
@@ -92,8 +92,8 @@ module.exports = grammar({
       seq(
         optional($.modifiers),
         "callback",
-        $.type,
-        $.identifier,
+        field("return_type", $.type),
+        field("name", $.identifier),
         "(",
         optional($.param_list),
         ")",
@@ -104,7 +104,7 @@ module.exports = grammar({
       seq(
         optional($.modifiers),
         "event",
-        $.identifier,
+        field("name", $.identifier),
         "(",
         optional($.param_list),
         ")",
@@ -115,7 +115,7 @@ module.exports = grammar({
       seq(
         optional($.modifiers),
         "enum",
-        $.identifier,
+        field("name", $.identifier),
         optional(seq(":", $.type)),
         "{",
         repeat($.enum_field),
@@ -128,20 +128,27 @@ module.exports = grammar({
       seq(
         optional($.modifiers),
         "register",
-        $.type,
-        $.identifier,
+        field("type", $.type),
+        field("name", $.identifier),
         "=",
         $.expression,
         ";",
       ),
 
     type_declaration: ($) =>
-      seq(optional($.modifiers), "type", $.identifier, "=", $.expression, ";"),
+      seq(
+        optional($.modifiers),
+        "type",
+        field("name", $.identifier),
+        "=",
+        $.expression,
+        ";",
+      ),
 
     variable_declaration: ($) =>
       seq(
         optional($.modifiers),
-        $.identifier,
+        field("name", $.identifier),
         optional(seq("=", $.expression)),
         ";",
       ),
@@ -241,7 +248,7 @@ module.exports = grammar({
 
     unary: ($) =>
       choice(
-        seq(choice("!", "-", "++", "--", "*", "&"), $.unary),
+        seq(choice("!", "-", "~", "++", "--", "*", "&"), $.unary),
         seq($.call, optional(choice("++", "--"))),
       ),
 
@@ -257,9 +264,9 @@ module.exports = grammar({
 
     lambda_expression: ($) =>
       seq(
-        "{",
+        "[",
         optional($.param_list),
-        "}",
+        "]",
         "(",
         optional($.param_list),
         ")",
