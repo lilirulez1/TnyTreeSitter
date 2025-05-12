@@ -94,6 +94,9 @@
 (type (builtin_type) @keyword)
 (type (identifier) @type)
 
+(call
+  (primary (identifier) @function))
+
 ;; Function and type declarations
 (function_declaration name: (identifier) @function)
 (struct_declaration name: (identifier) @type)
