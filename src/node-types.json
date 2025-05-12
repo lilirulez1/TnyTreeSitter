@@ -599,6 +599,10 @@
           "named": true
         },
         {
+          "type": "expression",
+          "named": true
+        },
+        {
           "type": "param_list",
           "named": true
         }

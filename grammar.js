@@ -266,7 +266,7 @@ module.exports = grammar({
     lambda_expression: ($) =>
       seq(
         "[",
-        optional($.param_list),
+        optional(seq($.expression, repeat(seq(",", $.expression)))),
         "]",
         "(",
         optional($.param_list),
